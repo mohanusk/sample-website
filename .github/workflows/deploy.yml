@@ -12,14 +12,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-     - name: Deploy to EC2
-  uses: appleboy/ssh-action@master
-  with:
-    host: ${{ secrets.EC2_HOST }}   # Make sure this matches exactly
-    username: ${{ secrets.EC2_USER }}
-    key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-    script: |
-      cd /var/www/html
-      git pull origin main
-      sudo systemctl restart apache2  # Or nginx if applicable
-
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}   # Make sure this matches your secret name
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/html
+            git pull origin main
+            sudo systemctl restart apache2
