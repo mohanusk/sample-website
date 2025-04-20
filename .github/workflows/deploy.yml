@@ -13,7 +13,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Remove old files on EC2
+    - name: Remove old files and fix permissions
       uses: appleboy/ssh-action@v0.1.6
       with:
         host: ${{ secrets.EC2_HOST }}
@@ -21,6 +21,7 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           sudo rm -rf /var/www/html/*
+          sudo chmod 777 /var/www/html
 
     - name: Copy files to EC2
       uses: appleboy/scp-action@v0.1.4
