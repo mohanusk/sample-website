@@ -3,7 +3,7 @@ name: Deploy Next.js App to EC2
 on:
   push:
     branches:
-      - develop
+      - master
 
 jobs:
   deploy:
